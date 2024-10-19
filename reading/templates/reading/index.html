@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Overview</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .test, .passage, .question, .choice {
+            margin-bottom: 10px;
+        }
+        .test {
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+        .passage {
+            margin-left: 20px;
+        }
+        .question {
+            margin-left: 40px;
+        }
+        .choice {
+            margin-left: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test Overview</h1>
+
+    {% for test in tests %}
+        <div class="test">
+            <h2>{{ test.title }}</h2>
+            <p>{{ test.description }}</p>
+
+            {% for passage in test.passages.all %}
+                <div class="passage">
+                    <h3>Passage</h3>
+                    <p>{{ passage.title }}</p>
+                {% for paragraph in passage.paragraphs.all %}
+                    <p>{{paragraph.paragraph}}</p>
+                {% endfor %}
+                    {% for question in passage.questions.all %}
+            
+                        <div class="question">
+                            <h4>Question: {{ question.text }}</h4>
+
+                            <ul>
+                                {% for choice in question.choices.all %}
+                                    <li class="choice">
+                                       <input type="radio" id="{{ choice.text }}" name="{{ question.id }}">
+                                       <label for="{{ choice.text }}"> {{ choice.text }} </label> 
+                                        {% if choice.is_correct %}
+                                            <strong>(Correct)</strong>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+    
+                            </ul>
+                        </div>
+    
+                    {% endfor %}
+                </div>
+                
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+</body>
+</html>

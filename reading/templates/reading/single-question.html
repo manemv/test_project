@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .passage {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .choices ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .choices li {
+            padding: 10px;
+            background-color: #e1e1e1;
+            margin-bottom: 5px;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+        }
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .nav-buttons a.disabled {
+            background-color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Test: {{ test.title }}</h1>
+
+    <div class="passage">
+        <h3>Passage</h3>
+        <p>{{ passage.content }}</p>
+    </div>
+
+    <div class="question">
+        <h4>Question: {{ question.text }}</h4>
+    </div>
+
+    <div class="choices">
+        <ul>
+            {% for choice in choices %}
+                <li>
+                    <input type="radio" id="{{ choice.text }}" name="{{ question.id }}">
+                    <label for="{{ choice.text }}"> {{ choice.text }} </label> 
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="nav-buttons">
+        {% if prev_question %}
+            <a href="{% url 'question_detail' test.id prev_question.id %}">Previous</a>
+        {% else %}
+            <a class="disabled">Previous</a>
+        {% endif %}
+
+        {% if next_question %}
+            <a href="{% url 'question_detail' test.id next_question.id %}">Next</a>
+        {% else %}
+            <a class="disabled">Next</a>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>
