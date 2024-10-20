@@ -4,14 +4,17 @@ from .models import Test, Passage, Paragraph, Question, Choice
 # Inline for Choice model under Question
 class ChoiceInline(admin.TabularInline):
     model = Choice
+    extra = 0
 
 # Inline for Question model under Passage
 class QuestionInline(admin.StackedInline):
     model = Question
+    extra = 0
     inlines = [ChoiceInline]  # Remove this, as nested inlines are not supported.
 
 #Inline for Paragraph model under Passage
 class ParagraphInline(admin.StackedInline):
+    extra = 0
     model = Paragraph
 
 # Admin class for Passage to display paragraphs and questions inline
