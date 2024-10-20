@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Test, Passage,Question, Choice
+from .models import Test, Passage, Paragraph, Question, Choice
 
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,16 +13,21 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         fields = ['id', 'text', 'choices']
 
+class ParagraphSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Paragraph
+        fields = ['id', 'paragraph']
+
 class PassageSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True)  # Nesting questions inside passage
-
+    paragraphs = ParagraphSerializer(many=True)
     class Meta:
         model = Passage
-        fields = ['id', 'content', 'questions']
+        fields = ['id','title', 'description','paragraphs', 'questions']
 
 class TestSerializer(serializers.ModelSerializer):
     passages = PassageSerializer(many=True)  # Nesting passages inside test
 
     class Meta:
         model = Test
-        fields = ['id', 'title', 'description']
+        fields = ['id', 'title', 'description', 'passages']

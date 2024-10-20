@@ -1,8 +1,10 @@
 from django.urls import path
-
+from .api import TestListAPIView, TestDetailAPIView
 from . import views
 
 urlpatterns = [
+    path('api/tests/', TestListAPIView.as_view(), name='test_list_api'),
+    path('api/tests/<int:pk>/', TestDetailAPIView.as_view(), name='test_detail_api'),
     path("", views.index, name="index"),
     path("<int:page_id>/page", views.page, name="page"),
     path('test/<int:test_id>/', views.question_detail, name='question_detail_default'),
