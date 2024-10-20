@@ -53,7 +53,10 @@
 
     <div class="passage">
         <h3>Passage</h3>
-        <p>{{ passage.content }}</p>
+        <p>{{ passage.title }}</p>
+        {% for paragraph in passage.paragraphs.all %}
+        <p>{{paragraph.paragraph}}</p>
+        {% endfor %}
     </div>
 
     <div class="question">
