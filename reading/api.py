@@ -11,3 +11,7 @@ class TestListAPIView(generics.ListAPIView):
 class TestDetailAPIView(generics.RetrieveAPIView):
     queryset = Test.objects.prefetch_related('passages__questions__choices')
     serializer_class = TestSerializer
+
+class TestCreateAPIView(generics.CreateAPIView):
+    queryset = Test.objects.all()
+    serializer_class = TestSerializer

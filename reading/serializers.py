@@ -31,3 +31,4 @@ class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
         fields = ['id', 'title', 'description', 'passages']
+
