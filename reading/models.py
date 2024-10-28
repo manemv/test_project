@@ -42,3 +42,12 @@ class Choice(models.Model):
     def __str__(self):
         return self.text
 
+class TestScore(models.Model):
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name='scores')
+    user_name = models.CharField(max_length=100)
+    score = models.IntegerField()
+    completed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user_name} - {self.score} points"
+

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Test, Passage, Paragraph, Question, Choice
+from .models import Test, Passage, Paragraph, Question, Choice, TestScore
 
 # Inline for Choice model under Question
 class ChoiceInline(admin.TabularInline):
@@ -28,3 +28,4 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]  # Show Choices inline under Question
 
 admin.site.register(Test)
+admin.site.register(TestScore)

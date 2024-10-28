@@ -30,8 +30,9 @@
 <body>
 
     <h1>Test Overview</h1>
-
+    
     {% for test in tests %}
+    {% if test.id == 1 %}
         <div class="test">
             <h2>{{ test.title }}</h2>
             <p>{{ test.description }}</p>
@@ -51,8 +52,8 @@
                             <ul>
                                 {% for choice in question.choices.all %}
                                     <li class="choice">
-                                       <input type="radio" id="{{ choice.text }}" name="{{ question.id }}">
-                                       <label for="{{ choice.text }}"> {{ choice.text }} </label> 
+                                       <input type="radio" id="{{ choice.id }}" name="{{ question.id }}">
+                                       <label for="{{ choice.id }}"> {{ choice.text }} </label> 
                                         {% if choice.is_correct %}
                                             <strong>(Correct)</strong>
                                         {% endif %}
@@ -67,7 +68,8 @@
                 
             {% endfor %}
         </div>
+        {% endif %}
     {% endfor %}
-
+    
 </body>
 </html>
